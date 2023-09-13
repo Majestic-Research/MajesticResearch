@@ -8,7 +8,7 @@ export async function PUT(request: Request, { params }: { params: { bairro: stri
     
     
     try {
-        const response = await axios.put(`http://127.0.0.1:3015/change/category/${params.bairro}`, res);
+        const response = await axios.put(`https://majesticresearch-api.onrender.com/change/category/${params.bairro}`, res);
         const data = response.data;
         console.log(JSON.stringify(data));
 

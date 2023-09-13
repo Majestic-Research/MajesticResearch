@@ -10,7 +10,6 @@ interface ItemProps {
 
 const Header: React.FC<ItemProps> = ({ onEnterPressed, onFocus, onChangePage }) => {
   const inputRef = useRef<HTMLInputElement | null>(null);
-  const [isFocus, setIsFocus] = useState(false)
   const [page, setPage] = useState('categorization')
 
   useEffect(() => {
@@ -38,11 +37,9 @@ const Header: React.FC<ItemProps> = ({ onEnterPressed, onFocus, onChangePage }) 
         }}
         onFocus={() => {
           onFocus(true)
-          // console.log(true);
         }}
         onBlur={() => {
           onFocus(false)
-          // console.log(false);
         }}
       />
     </div>

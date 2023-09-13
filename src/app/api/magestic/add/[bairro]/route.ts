@@ -7,7 +7,7 @@ export async function POST(request: Request, { params }: { params: { bairro: str
     
     
     try {
-        const response = await axios.post(`http://127.0.0.1:3015/add/${params.bairro}`, res);
+        const response = await axios.post(`https://majesticresearch-api.onrender.com/add/${params.bairro}`, res);
         const data = response.data;
         console.log(JSON.stringify(data));
 
