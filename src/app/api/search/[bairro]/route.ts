@@ -37,6 +37,9 @@ export async function GET(request: Request,  { params }: { params: { bairro: str
     "address",
     "_highlightResult",
     "_geoloc",
+    "photos",
+    "amenities",
+    "unitFeatures"
   ];
 
   const cleanedData: object[] = df_completo
@@ -44,6 +47,9 @@ export async function GET(request: Request,  { params }: { params: { bairro: str
     .filter(row => row['address'] && row['address']['streetType'])
     .map(row => ({
       ...row,
+      photos: row['photos'] ? row['photos'] : [],
+      amenities: row['amenities'] ? row['amenities'] : [],
+      unitFeatures: row['unitFeatures'] ? row['unitFeatures'] : [],
       geoloc_lat: row['_geoloc_lat'],
       geoloc_lng: row['_geoloc_lng'],
       full_address: concatAddress(row['address'])

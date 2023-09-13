@@ -63,7 +63,8 @@ export default function Categorization({ bairro, isFocus }: { bairro: string | n
       
       try {
         const response = await axios.post(`/api/magestic/add/${bairro}`, data)
-        setItemReturn(response.data)
+        setItemReturn(response.data.property)
+        
       } catch (error) {
         console.log('Error post data: ', error)
       }
@@ -74,7 +75,8 @@ export default function Categorization({ bairro, isFocus }: { bairro: string | n
       
       try {
         const response = await axios.put(`/api/magestic/update/${bairro}`, data)
-        setItemReturn(response.data)
+        setItemReturn(response.data.newProperty)
+        
       } catch (error) {
         console.log('Error post data: ', error)
       }
