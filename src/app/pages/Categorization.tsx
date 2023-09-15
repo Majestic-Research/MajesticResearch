@@ -92,7 +92,7 @@ export default function Categorization({ bairro, isFocus }: { bairro: string | n
       getData()
     }, [bairroCategorizado])
     useEffect(() => {
-        console.log()
+        setItemReturn(itemReturn)
     }, [backClicked])
     return (
         <>
