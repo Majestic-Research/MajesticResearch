@@ -2,10 +2,11 @@ import { api } from "@/lib/api";
 import { NextResponse } from "next/server";
 import axios from "axios";
 
-export async function POST(request: Request, { params }: { params: { bairro: string } }): Promise<Response> {
-        
+export async function GET(request: Request, { params }: { params: { bairro: string, plataform: string } }): Promise<Response> {
     try {
-        const response = await axios.post(`http://127.0.0.1:3015/add/table/${params.bairro}`);
+        console.log(params.plataform);
+        
+        const response = await axios.get(`http://0.0.0.0:3333/${params.plataform}/search/${params.bairro}`);
         const data = response.data;
         console.log(JSON.stringify(data));
 

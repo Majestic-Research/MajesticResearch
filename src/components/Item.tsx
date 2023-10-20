@@ -17,14 +17,16 @@ interface ItemProps {
     onCategorize: (category: number) => void;
     onBack: () => void;
     back: boolean;
-    isFree: boolean
+    isFree: boolean,
+    zap: boolean,
+    zapPhotos: string[]
 }
 
 interface Images {
     data: string[]
 }
 
-const Item: React.FC<ItemProps> = ({ dados, mini, onCategorize, onBack, back, isFree, category }) => {
+const Item: React.FC<ItemProps> = ({ dados, mini, onCategorize, onBack, back, isFree, category, zap, zapPhotos }) => {
     const [confirm, setConfirm] = useState<boolean>(false)
     const [selectValue, setSelectValue] = useState<string>('null')
     const [img, setImg] = useState<string[]>(['https://i.seadn.io/gae/CyjD_1yJ_1LocRGzcPqqea7IQPgQzD7ywpsSd132aQQMtkXXLdM6ViX62jIrMMqiI3Y9iJbBT0AJdiqWkAjV1AAqi7vI2zrBokryKMk?auto=format&dpr=1&w=1000'])
@@ -85,7 +87,7 @@ const Item: React.FC<ItemProps> = ({ dados, mini, onCategorize, onBack, back, is
 
     return (
         <div className='flex flex-col items-center gap-3 p-7 max-sm:gap-[30px] bg-gray-800 rounded-md'>
-            <PhotoCarousel images={img} mini={mini} />
+            <PhotoCarousel images={zap ? zapPhotos : img} mini={mini} />
             <div className='w-full flex flex-row justify-between'>
                 {!mini && back ? (
                     <div className='w-full flex min-[1141px]:hidden'>
@@ -166,7 +168,7 @@ const Item: React.FC<ItemProps> = ({ dados, mini, onCategorize, onBack, back, is
                     ): null}
                     <div>
                         <h1 className='text-2xl'>R$ {dados.price && dados.price.toLocaleString('pt-BR', { maximumFractionDigits: 0 })}</h1>
-                        <h2 className='text-xl font-alt'>R$ {dados.price && dados.area ? Math.round(dados.price / dados.area).toLocaleString('pt-BR', { maximumFractionDigits: 0 }) : null}/m² | {dados.area} m²</h2>
+                        <h2 className='text-xl font-alt'>R$ {dados.price && dados.area ? Math.round(Number(dados.price) / Number(dados.area)).toLocaleString('pt-BR', { maximumFractionDigits: 0 }) : null}/m² | {dados.area} m²</h2>
                     </div>
                 </div>
                 <div className='flex flex-row gap-0 max-[1358px]:hidden'>

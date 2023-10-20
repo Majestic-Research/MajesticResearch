@@ -4,8 +4,9 @@ import { useEffect, useState } from 'react'
 import Item from '@/components/Item'
 import Header from '@/components/Header';
 import { api } from '@/lib/api';
-import Categorization from './pages/Categorization';
+import Loft from './pages/Loft';
 import Gallery from './pages/Gallery';
+import Zap from './pages/Zap';
 
 
 
@@ -14,7 +15,7 @@ import Gallery from './pages/Gallery';
 export default function Home() {
   const [bairro, setBairro] = useState<string|null>()
   const [isFocus, setIsfocus] = useState<boolean>(false)
-  const [page, setPage] = useState('categorization')
+  const [page, setPage] = useState('Loft')
 
   return (
     <div className='w-full h-full bg-black'>
@@ -29,7 +30,8 @@ export default function Home() {
           }}
           onChangePage={(e) => setPage(e)}
         />
-        {page === 'categorization' && (<Categorization bairro={bairro || null} isFocus={isFocus} />)}
+        {page === 'Loft' && (<Loft bairro={bairro || null} isFocus={isFocus} />)}
+        {page === 'Zap' && (<Zap bairro={bairro || null} isFocus={isFocus} />)}
         {page === 'gallery' && (<Gallery bairro={bairro || null} />)}
       </div>
     </div>

@@ -3,10 +3,10 @@ import { NextResponse } from "next/server";
 import axios from "axios";
 
 export async function GET(request: Request, { params }: { params: { bairro: string } }): Promise<Response> {
-    try {
-        const response = await axios.get(`https://majesticresearch-api.onrender.com/search/${params.bairro}`);
+    try {        
+        const response = await axios.get(`http://127.0.0.1:3333/get/page/${params.bairro}`);
         const data = response.data;
-        console.log(JSON.stringify(data));
+        
 
         return NextResponse.json(data);
     } catch (error) {

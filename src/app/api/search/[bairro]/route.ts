@@ -50,8 +50,8 @@ export async function GET(request: Request,  { params }: { params: { bairro: str
       photos: row['photos'] ? row['photos'] : [],
       amenities: row['amenities'] ? row['amenities'] : [],
       unitFeatures: row['unitFeatures'] ? row['unitFeatures'] : [],
-      geoloc_lat: row['_geoloc_lat'],
-      geoloc_lng: row['_geoloc_lng'],
+      geoloc_lat: row['_geoloc']['lat'],
+      geoloc_lng: row['_geoloc']['lng'],
       full_address: concatAddress(row['address'])
     }))
     .map(row => {

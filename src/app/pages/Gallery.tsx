@@ -12,7 +12,8 @@ interface LoftItem {
     id: string;
     price: number;
     area: number;
-    category: number
+    category: number;
+    photos: string[]
   }
   
   interface LoftResponse {
@@ -21,10 +22,11 @@ interface LoftItem {
 
 export default function Gallery({ bairro }: { bairro: string | null; }) {
     const [bairroCategorizado, setBairroCategorizado] = useState<MagesticItem[] | null>(null)
+    const [plataform, setPlataform] = useState<string>("loft")
   
     const getTable = async () => {
       try {
-        const response = await axios.get(`/api/magestic/search/${bairro}`);
+        const response = await axios.get(`/api/magestic/search/${plataform}/${bairro}`);
         const data = response.data.properties;
         setBairroCategorizado(data)
         
@@ -46,12 +48,23 @@ export default function Gallery({ bairro }: { bairro: string | null; }) {
     }
     
     useEffect(() => {
-      if (bairro) {
-        getTable()
-      }
+      bairro && getTable()
     }, [bairro])
+    useEffect(() => {
+      bairro && getTable()
+    }, [plataform])
     return (
         <>
+          <div className="flex flex-row gap-14">
+            <button 
+              onClick={() => setPlataform("loft")} 
+              className={`${plataform == "loft" ?"border-b border-b-golden-1" : ""}`}
+            >Loft</button>
+            <button 
+              onClick={() => setPlataform("zap")} 
+              className={`${plataform == "zap" ?"border-b border-b-golden-1" : ""}`}
+            >Zap</button>
+          </div>
             <div className='flex w-full flex-wrap mt-8'>
                 {bairroCategorizado && bairroCategorizado?.map((item, index) => {
                     return (
@@ -66,6 +79,8 @@ export default function Gallery({ bairro }: { bairro: string | null; }) {
                                 }}
                                 category={item.category}
                                 onBack={() => {}}
+                                zap={plataform === "zap"}
+                                zapPhotos={plataform === "zap" ? item.photos : []}
                             />
                         </div>
                     )

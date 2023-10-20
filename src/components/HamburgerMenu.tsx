@@ -9,7 +9,7 @@ interface MenuProps {
 
 const MenuHamburger: React.FC<MenuProps> = ({ onChangePage }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [page, setPage] = useState('categorization')
+  const [page, setPage] = useState('Loft')
 
 
   const toggleMenu = () => {
@@ -37,26 +37,37 @@ const MenuHamburger: React.FC<MenuProps> = ({ onChangePage }) => {
             >
 
 
-              {page === 'categorization' ? (
+              {page === 'Loft' ? (
                 <button onClick={() => {
-                  setPage('categorization')
-                }} className='text-2xl px-6 border-l border-l-golden-1' >Categorização</button>
+                  setPage('Loft')
+                }} className='text-2xl px-6 border-l border-l-golden-1 transition-[0.5s]' >Loft</button>
               ) : (
                 <button onClick={() => {
-                  setPage('categorization')
+                  setPage('Loft')
                   setIsOpen(false)
-                }} className='text-xl px-6 hover:border-l hover:border-l-golden-1 hover:text-2xl' >Categorização</button>
+                }} className='text-xl px-6 hover:border-l hover:border-l-golden-1 hover:text-2xl transition-[0.5s]' >Loft</button>
+              )}
+
+              {page === 'Zap' ? (
+                <button onClick={() => {
+                  setPage('Zap')
+                }} className='text-2xl px-6 border-l border-l-golden-1 transition-[0.5s]' >Zap</button>
+              ) : (
+                <button onClick={() => {
+                  setPage('Zap')
+                  setIsOpen(false)
+                }} className='text-xl px-6 hover:border-l hover:border-l-golden-1 hover:text-2xl transition-[0.5s]' >Zap</button>
               )}
 
               {page === 'gallery' ? (
                 <button onClick={() => {
                   setPage('gallery')
-                }} className='text-2xl px-6 border-l border-l-golden-1' >Galeria</button>
+                }} className='text-2xl px-6 border-l border-l-golden-1 transition-[0.5s]' >Galeria</button>
               ) : (
                 <button onClick={() => {
                   setPage('gallery')
                   setIsOpen(false)
-                }} className='text-xl px-6 hover:border-l hover:border-l-golden-1 hover:text-2xl' >Galeria</button>
+                }} className='text-xl px-6 hover:border-l hover:border-l-golden-1 hover:text-2xl transition-[0.5]' >Galeria</button>
               )}
 
             </div>

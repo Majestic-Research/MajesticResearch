@@ -19,7 +19,7 @@ interface LoftItem {
     data: LoftItem[];
   }
 
-export default function Categorization({ bairro, isFocus }: { bairro: string | null; isFocus: boolean }) {
+export default function Loft({ bairro, isFocus }: { bairro: string | null; isFocus: boolean }) {
     const [dadosLoft, setDadosLoft] = useState<LoftItem[] | null>(null);
     const [categorized, setCategorized] = useState<number>(0)
     const [bairroCategorizado, setBairroCategorizado] = useState<LoftItem[] | null>(null)
@@ -47,7 +47,7 @@ export default function Categorization({ bairro, isFocus }: { bairro: string | n
   
     const getTable = async () => {
       try {
-        const response = await axios.get(`/api/magestic/search/${bairro}`);
+        const response = await axios.get(`/api/magestic/search/loft/${bairro}`);
         const data = response.data.properties;
         setBairroCategorizado(data)
         
@@ -62,7 +62,7 @@ export default function Categorization({ bairro, isFocus }: { bairro: string | n
       data = {...data, category: category}
       
       try {
-        const response = await axios.post(`/api/magestic/add/${bairro}`, data)
+        const response = await axios.post(`/api/magestic/add/loft/${bairro}`, data)
         setItemReturn(response.data.property)
         
       } catch (error) {
@@ -74,7 +74,7 @@ export default function Categorization({ bairro, isFocus }: { bairro: string | n
       const data = {id: id, category: category}
       
       try {
-        const response = await axios.put(`/api/magestic/update/${bairro}`, data)
+        const response = await axios.put(`/api/magestic/update/loft/${bairro}`, data)
         setItemReturn(response.data.newProperty)
         
       } catch (error) {
@@ -83,16 +83,18 @@ export default function Categorization({ bairro, isFocus }: { bairro: string | n
     }
     
     useEffect(() => {
-      if (bairro) {
-        getTable()
-      }
+        bairro && getTable()
     }, [bairro])
   
     useEffect(() => {
-      getData()
+      bairro && getData()
     }, [bairroCategorizado])
     useEffect(() => {
-        setItemReturn(itemReturn)
+        setBackClicked(backClicked)
+        
+    }, [backClicked])
+    useEffect(() => {
+      setItemReturn(itemReturn)
     }, [backClicked])
     return (
         <>
@@ -111,6 +113,7 @@ export default function Categorization({ bairro, isFocus }: { bairro: string | n
                             data.shift()
                             setDadosLoft(data)
                             setCategorized(categorized + 1)
+                            
                         }
 
                         dadosLoft && !backClicked ? addCategorized(backClicked && itemReturn ? itemReturn : dadosLoft[0], category) : null
@@ -123,6 +126,8 @@ export default function Categorization({ bairro, isFocus }: { bairro: string | n
                         setBackClicked(true)
                     }
                     }
+                    zap={false}
+                    zapPhotos={[]}
                 />
             </div>
         </>

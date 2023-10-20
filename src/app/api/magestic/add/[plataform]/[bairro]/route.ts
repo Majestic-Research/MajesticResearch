@@ -2,13 +2,12 @@ import { api } from "@/lib/api";
 import { NextResponse } from "next/server";
 import axios from "axios";
 
-export async function PUT(request: Request, { params }: { params: { bairro: string } }): Promise<Response> {
+export async function POST(request: Request, { params }: { params: { bairro: string, plataform: string } }): Promise<Response> {
     const res = await request.json()
-    console.log(res);
     
     
     try {
-        const response = await axios.put(`https://majesticresearch-api.onrender.com/change/category/${params.bairro}`, res);
+        const response = await axios.post(`http://0.0.0.0:3333/${params.plataform}/add/${params.bairro}`, res);
         const data = response.data;
         console.log(JSON.stringify(data));
 
